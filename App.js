@@ -1,40 +1,22 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import header from ".";
 
 export default function App() {
-    const [name, setName] = useState('Bea');
-    const [age, setAge] = useState('19')
-    
-    const [people, setPeople] = useState([
-        {name: "Mario", key: 1},
-        {name: "Luigi", key: 2},
-        {name: "Peach", key: 3},
-        {name: "Bowser", key: 4},
-        {name: "Goomba", key: 5},
-        {name: "Toad", key: 6},
-    ])
-
+    const [todos, setTodos] = useState([
+        { text: "Finish react native class", key: "1" },
+        { text: "Flutter", key: "2" }
+    ]);
     return (
         <View style={styles.container}>
-            <View>
-                <Text>Enter Name: </Text>
-                <TextInput 
-                    multiline
-                    style={styles.input}
-                    placeholder="Bea Miranda"
-                    onChangeText={(val) => setName(val)}
+            {/* Header */}
+            <View style={styles.content}>
+                {/* To Do Form */}
+                <View style={styles.list}>
+                    <FlatList
+                        data={todos}
+                        renderItem={({ item }) => <Text>{item.text}</Text>}
                     />
-                <Text>Enter Age: </Text>
-                <TextInput 
-                    keyboardType='numeric'
-                    style={styles.input} 
-                    placeholder="19"
-                    onChangeText={(val) => setAge(val)}
-                    />
-
-                <Text>Hello {name}, and you are {age} years old !!!</Text>
-                <View style={styles.buttonContainer}>
-                    <Button title="Update state"/>
                 </View>
             </View>
         </View>
@@ -44,32 +26,12 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#fff"
     },
-    header: {
-        backgroundColor: 'pink',
-        padding: 20,
+    content: {
+        padding: 40
     },
-    boldText: {
-        fontWeight: 'bold',
-    },
-    buttonContainer: {
+    list: {
         marginTop: 20
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#777',
-        padding: 8,
-        margin: 10,
-        width: 200,
-    },
-    listContainer: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 40,
-        paddingHorizontal: 20
     }
 });
-
