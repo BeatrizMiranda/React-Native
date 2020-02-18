@@ -6,15 +6,20 @@ export default function AddTodo({ submitHanddler }) {
     const changeHanddler = val => {
         setText(val);
     };
+
     return (
         <View>
             <TextInput
                 style={styles.input}
                 placeholder="New Todo..."
                 onChangeText={changeHanddler}
+                value={text}
             />
             <Button
-                onPress={() => submitHanddler(text)}
+                onPress={() => {
+                    submitHanddler(text);
+                    setText("");
+                }}
                 title="Add Todo"
                 color="coral"
             />
